@@ -3,6 +3,6 @@
 - To run the project use
 
   ```
-  poetry run
+  poetry run dev
 
   ```
