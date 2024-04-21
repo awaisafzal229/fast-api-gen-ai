@@ -3,14 +3,33 @@ import uvicorn
 
 app = FastAPI()
 
+students = [{
+    "userName" : "Ali",
+    "rollNo" : 20
+},
+{
+    "userName" : "Awais",
+    "rollNo" : 21
+}
+]
+@app.get("/students")
+def getStudents():
+    return students
+
+@app.get("/addStudent")
+def addStudent(userName: str, rollNo: str):
+    global students
+    students.append({"userName": userName, "rollNo": rollNo})
+    return students
+
 @app.get("/")
 def helloWorld():
     return "Hello, World!"
 
-@app.get("/gettodos")
-def getTodos():
-    print("Get todos called")
-    return "gettodos called"    
+@app.get("/gettodos/{id}")
+def getTodos(id):
+    print("Get todos called",id)
+    return id    
 
 @app.post("/gettodos")
 def getTodosPost():
@@ -22,8 +41,8 @@ def getTodosPost():
 #     print("Get todo called")
 #     return "getSingleTodo called"
 @app.get("/getSingleTodo")
-def get_single_todo():
-    print("Get todo called")
+def get_single_todo(userName:str, rollNo:str):
+    print("Get todo called",userName, rollNo)
     return "getSingleTodo called"
 
 @app.put("/updateTodo")
